@@ -1,0 +1,68 @@
+<!-- HISTORY PAGE — Premium Timeline Redesign -->
+
+<div class="history-hero">
+  <div class="history-hero-bg"></div>
+  <div class="history-hero-overlay"></div>
+  <div class="history-hero-content">
+    <p class="history-breadcrumb">
+      <a routerLink="/">Home</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'history.title' | translate }}</span>
+    </p>
+    <h1>{{ 'history.page_heading' | translate }}</h1>
+    <p class="history-hero-sub">{{ 'history.subtitle' | translate }}</p>
+    <div class="history-hero-tags">
+      <span><mat-icon>auto_stories</mat-icon> Our Heritage</span>
+      <span><mat-icon>calendar_month</mat-icon> Since 2013</span>
+      <span><mat-icon>place</mat-icon> Mellacheruvu</span>
+    </div>
+  </div>
+  <!-- MCT-style text watermark -->
+  <div class="history-hero-watermark" aria-hidden="true">MCT</div>
+</div>
+
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.history' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- Timeline Section -->
+<section class="history-timeline-section mct-section">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <span class="mct-section-eyebrow">Our Journey</span>
+      <h2>{{ 'history.page_heading' | translate }}</h2>
+      <p>{{ 'history.subtitle' | translate }}</p>
+    </div>
+
+    <div class="history-timeline">
+      @for (m of milestones; track $index) {
+        <div class="ht-item" [class.ht-right]="$index % 2 === 1">
+          <div class="ht-dot">
+            <span>{{ m.year }}</span>
+          </div>
+          <div class="ht-card">
+            <span class="ht-year-bg" aria-hidden="true">{{ m.year }}</span>
+            <div class="ht-card-icon">
+              <mat-icon>event_note</mat-icon>
+            </div>
+            <p>{{ m.event }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA strip -->
+<section class="history-cta-strip">
+  <div class="mct-container">
+    <p class="history-cta-eyebrow">Be Part of Our Story</p>
+    <h2>Help Us Write the Next Chapter</h2>
+    <div class="history-cta-actions">
+      <a routerLink="/donation" class="history-cta-btn"><mat-icon>favorite</mat-icon> Donate Now</a>
+      <a routerLink="/contact" class="history-cta-btn-outline"><mat-icon>mail</mat-icon> Get in Touch</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <!-- Column 1: Brand -->
+    <div class="footer-col brand-col">
+      <div class="footer-logo">
+        <div class="logo-circle">
+          <img src="mct_logo.png" alt="MCT Logo" class="logo-img" />
+        </div>
+        <span>{{ 'brand.name' | translate }}</span>
+      </div>
+      <p class="footer-tagline">{{ 'footer.tagline' | translate }}</p>
+      <p class="tax-badge">
+        <i class="fa-solid fa-landmark"></i>
+        {{ 'footer.tax_note' | translate }}
+      </p>
+    </div>
+
+    <!-- Column 2: Site Links -->
+    <div class="footer-col">
+      <h4>{{ 'footer.quick_links' | translate }}</h4>
+      <ul class="footer-links">
+        <li><a routerLink="/"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.home'       | translate }}</a></li>
+        <li><a routerLink="/about"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.about'      | translate }}</a></li>
+        <li><a routerLink="/activities"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.activities' | translate }}</a></li>
+        <li><a routerLink="/gallery"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.gallery'    | translate }}</a></li>
+        <li><a routerLink="/blog"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.blog'        | translate }}</a></li>
+        <li><a routerLink="/events"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.events'     | translate }}</a></li>
+        <li><a routerLink="/history"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.history'       | translate }}</a></li>
+        <li><a routerLink="/management"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.management' | translate }}</a></li>
+        <li><a routerLink="/donation"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.donation'     | translate }}</a></li>
+        <li><a routerLink="/contact"><i class="fa-solid fa-chevron-right"></i> {{ 'nav.contact'    | translate }}</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Contact + Social -->
+    <div class="footer-col">
+      <h4>{{ 'footer.contact_us' | translate }}</h4>
+      <ul class="contact-list">
+        <li>
+          <i class="fa-solid fa-location-dot"></i>
+          {{ 'footer.address' | translate }}
+        </li>
+        <li>
+          <i class="fa-solid fa-phone"></i>
+          {{ 'footer.phone' | translate }}
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          {{ 'footer.email' | translate }}
+        </li>
+      </ul>
+
+      <!-- Social Media -->
+      <h4 class="social-heading">{{ 'footer.social_title' | translate }}</h4>
+      <div class="social-links">
+        <a [href]="'social.linkedin' | translate" target="_blank" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a [href]="'social.twitter' | translate" target="_blank" aria-label="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a [href]="'social.facebook' | translate" target="_blank" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a [href]="'social.instagram' | translate" target="_blank" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a [href]="'social.youtube' | translate" target="_blank" aria-label="YouTube">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <span>{{ rights() }}</span>
+  </div>
+
+</footer>

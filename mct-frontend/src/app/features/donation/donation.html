@@ -1,0 +1,208 @@
+<!-- DONATION PAGE — Premium split-layout design -->
+
+<!-- 1. Hero -->
+<div class="don-hero">
+  <div class="don-hero-bg"></div>
+  <div class="don-hero-overlay"></div>
+  <div class="mct-container don-hero-inner">
+    <div class="don-hero-text">
+      <p class="don-eyebrow"><mat-icon>favorite</mat-icon> Make A Difference</p>
+      <h1>{{ 'donation.page_heading' | translate }}</h1>
+      <p class="don-hero-sub">{{ 'donation.subtitle' | translate }}</p>
+      <div class="don-trust-badges">
+        <span><mat-icon>verified</mat-icon> 80G Tax Exempt</span>
+        <span><mat-icon>security</mat-icon> 100% Secure</span>
+        <span><mat-icon>receipt_long</mat-icon> Receipt Issued</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Marquee -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.donate' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- 3. Impact stats band -->
+<div class="don-impact-band">
+  <div class="mct-container don-impact-grid">
+    <div class="don-impact-item">
+      <mat-icon>people</mat-icon>
+      <span class="don-impact-num">50,000+</span>
+      <span class="don-impact-label">Lives Impacted</span>
+    </div>
+    <div class="don-impact-divider"></div>
+    <div class="don-impact-item">
+      <mat-icon>volunteer_activism</mat-icon>
+      <span class="don-impact-num">₹ 1Cr+</span>
+      <span class="don-impact-label">Raised Till Date</span>
+    </div>
+    <div class="don-impact-divider"></div>
+    <div class="don-impact-item">
+      <mat-icon>water_drop</mat-icon>
+      <span class="don-impact-num">100+</span>
+      <span class="don-impact-label">Projects Completed</span>
+    </div>
+    <div class="don-impact-divider"></div>
+    <div class="don-impact-item">
+      <mat-icon>location_on</mat-icon>
+      <span class="don-impact-num">20+</span>
+      <span class="don-impact-label">Villages Served</span>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Main section — split layout -->
+<section class="don-main-section">
+  <div class="mct-container don-main-grid">
+
+    <!-- LEFT: Form panel -->
+    <div class="don-form-panel">
+      <div class="don-form-card">
+        <div class="don-form-header">
+          <span class="don-form-icon"><mat-icon>favorite</mat-icon></span>
+          <div>
+            <h2>{{ 'donation.form_title' | translate }}</h2>
+            <p>{{ 'donation.tax_note' | translate }}</p>
+          </div>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="don-form">
+
+          <!-- Name row -->
+          <div class="don-name-row">
+            <mat-form-field appearance="outline" class="don-fw">
+              <mat-label>{{ 'donation.first_name' | translate }}</mat-label>
+              <input matInput formControlName="firstName" maxlength="50" />
+              <mat-icon matSuffix>person</mat-icon>
+              @if (form.get('firstName')?.hasError('required') && form.get('firstName')?.touched) {
+                <mat-error>First name is required.</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="don-fw">
+              <mat-label>{{ 'donation.last_name' | translate }}</mat-label>
+              <input matInput formControlName="lastName" maxlength="50" />
+              @if (form.get('lastName')?.hasError('required') && form.get('lastName')?.touched) {
+                <mat-error>Last name is required.</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Phone & Email row -->
+          <div class="don-name-row">
+            <mat-form-field appearance="outline" class="don-fw">
+              <mat-label>{{ 'donation.phone' | translate }}</mat-label>
+              <input matInput formControlName="phone" inputmode="numeric" maxlength="10" />
+              <mat-icon matSuffix>phone</mat-icon>
+              @if (form.get('phone')?.hasError('required') && form.get('phone')?.touched) {
+                <mat-error>Phone is required.</mat-error>
+              } @else if (form.get('phone')?.hasError('pattern') && form.get('phone')?.touched) {
+                <mat-error>Enter a valid 10-digit number.</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="don-fw">
+              <mat-label>{{ 'donation.email' | translate }}</mat-label>
+              <input matInput formControlName="email" type="email" />
+              <mat-icon matSuffix>email</mat-icon>
+              @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+                <mat-error>Email is required.</mat-error>
+              } @else if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+                <mat-error>Enter a valid email.</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Amount -->
+          <mat-form-field appearance="outline" class="don-full">
+            <mat-label>{{ 'donation.amount' | translate }} (₹)</mat-label>
+            <input matInput formControlName="amount" type="number" min="1" />
+            <mat-icon matSuffix>currency_rupee</mat-icon>
+            @if (form.get('amount')?.hasError('required') && form.get('amount')?.touched) {
+              <mat-error>Amount is required.</mat-error>
+            } @else if (form.get('amount')?.hasError('min') && form.get('amount')?.touched) {
+              <mat-error>Amount must be at least ₹1.</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Quick amount chips -->
+          <div class="don-quick-amounts">
+            <span class="don-quick-label">Quick Select:</span>
+            <button type="button" class="don-quick-btn" (click)="form.patchValue({amount: '500'})">₹500</button>
+            <button type="button" class="don-quick-btn" (click)="form.patchValue({amount: '1000'})">₹1,000</button>
+            <button type="button" class="don-quick-btn" (click)="form.patchValue({amount: '2500'})">₹2,500</button>
+            <button type="button" class="don-quick-btn" (click)="form.patchValue({amount: '5000'})">₹5,000</button>
+          </div>
+
+          <!-- Purpose -->
+          <mat-form-field appearance="outline" class="don-full">
+            <mat-label>{{ 'donation.purpose' | translate }}</mat-label>
+            <mat-select formControlName="purpose">
+              @for (opt of purposes; track opt) {
+                <mat-option [value]="opt">{{ opt }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-flat-button type="submit" class="don-submit-btn">
+            <mat-icon>favorite</mat-icon>
+            {{ 'donation.submit' | translate }}
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- RIGHT: Info panel -->
+    <div class="don-info-panel">
+
+      <!-- Bank details card -->
+      <div class="don-bank-card">
+        <div class="don-bank-header">
+          <span class="don-bank-icon"><mat-icon>account_balance</mat-icon></span>
+          <div>
+            <h3>{{ 'donation.bank_title' | translate }}</h3>
+            <p>Direct bank transfer</p>
+          </div>
+        </div>
+        <div class="don-bank-rows">
+          <div class="don-bank-row">
+            <span class="don-bank-label"><mat-icon>business</mat-icon>Bank</span>
+            <span class="don-bank-val">{{ 'donation.bank_name' | translate }}</span>
+          </div>
+          <div class="don-bank-row">
+            <span class="don-bank-label"><mat-icon>person</mat-icon>Name</span>
+            <span class="don-bank-val">{{ 'donation.account_name' | translate }}</span>
+          </div>
+          <div class="don-bank-row">
+            <span class="don-bank-label"><mat-icon>pin</mat-icon>A/C No.</span>
+            <span class="don-bank-val">{{ 'donation.account_no' | translate }}</span>
+          </div>
+          <div class="don-bank-row">
+            <span class="don-bank-label"><mat-icon>code</mat-icon>IFSC</span>
+            <span class="don-bank-val">{{ 'donation.ifsc' | translate }}</span>
+          </div>
+          <div class="don-bank-row">
+            <span class="don-bank-label"><mat-icon>location_on</mat-icon>Branch</span>
+            <span class="don-bank-val">{{ 'donation.branch' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why donate card -->
+      <div class="don-why-card">
+        <h3>Why Donate to MCT?</h3>
+        <ul class="don-why-list">
+          <li><mat-icon>check_circle</mat-icon> Free meals for hundreds daily</li>
+          <li><mat-icon>check_circle</mat-icon> Clean water for rural villages</li>
+          <li><mat-icon>check_circle</mat-icon> Free books to school children</li>
+          <li><mat-icon>check_circle</mat-icon> Meditation halls across AP</li>
+          <li><mat-icon>check_circle</mat-icon> Goshala &amp; environment care</li>
+          <li><mat-icon>check_circle</mat-icon> 80G tax exemption available</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

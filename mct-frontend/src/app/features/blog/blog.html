@@ -1,0 +1,142 @@
+<!-- BLOG PAGE — Audio Books Library -->
+
+<div class="blog-hero">
+  <div class="blog-hero-bg"></div>
+  <div class="blog-hero-overlay"></div>
+  <div class="blog-hero-content">
+    <p class="blog-breadcrumb">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'blog.title' | translate }}</span>
+    </p>
+    <h1>{{ 'blog.page_heading' | translate }}</h1>
+    <p class="blog-hero-sub">{{ 'blog.page_subtitle' | translate }}</p>
+    <div class="blog-hero-tags">
+      <span><mat-icon>headphones</mat-icon> Audio Books</span>
+      <span><mat-icon>self_improvement</mat-icon> Vedic Chants</span>
+      <span><mat-icon>download</mat-icon> Free Download</span>
+    </div>
+  </div>
+  <!-- watermark -->
+  <div class="blog-hero-watermark" aria-hidden="true">MCT</div>
+</div>
+
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.blog' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<section class="mct-section">
+  <div class="mct-container">
+
+    <!-- Section header -->
+    <div class="blog-header">
+      <div class="blog-header-text">
+        <h2>
+          <mat-icon>library_music</mat-icon>
+          {{ 'blog.audio_title' | translate }}
+        </h2>
+        <p>{{ 'blog.audio_subtitle' | translate }}</p>
+      </div>
+
+      <!-- Search -->
+      <mat-form-field appearance="outline" class="blog-search">
+        <mat-label>{{ 'blog.search_placeholder' | translate }}</mat-label>
+        <input matInput [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Category chips -->
+    <div class="filter-row">
+      <mat-chip-set aria-label="Audio book category">
+        @for (cat of categories; track cat) {
+          <mat-chip
+            [highlighted]="activeFilter() === cat"
+            (click)="setFilter(cat)"
+            class="filter-chip">
+            {{ categoryLabel(cat) }}
+          </mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+    <!-- Result count -->
+    <p class="result-count">
+      <mat-icon>headphones</mat-icon>
+      {{ filtered.length }} {{ 'blog.books_found' | translate }}
+    </p>
+
+    <!-- Audio book cards -->
+    @if (filtered.length === 0) {
+      <div class="blog-empty">
+        <mat-icon>headset_off</mat-icon>
+        <p>{{ 'blog.no_results' | translate }}</p>
+      </div>
+    } @else {
+      <div class="audio-grid">
+        @for (book of filtered; track book.id) {
+          <mat-card class="audio-card" appearance="outlined">
+
+            <!-- Cover -->
+            <div class="audio-cover" [style.background-image]="'url(' + book.coverUrl + ')'">
+              <div class="audio-cover-overlay">
+                <button mat-icon-button class="play-btn"
+                        [class.playing]="playingId() === book.id"
+                        (click)="togglePlay(book.id)">
+                  <mat-icon>{{ playingId() === book.id ? 'pause_circle' : 'play_circle' }}</mat-icon>
+                </button>
+              </div>
+              <!-- Language badge -->
+              <span class="lang-badge" [style.background]="langColor(book.language)">
+                {{ book.language }}
+              </span>
+            </div>
+
+            <mat-card-content class="audio-info">
+              <h3 class="audio-title">{{ displayTitle(book) }}</h3>
+              <p class="audio-author">
+                <mat-icon>person</mat-icon> {{ book.author }}
+              </p>
+              <p class="audio-desc">{{ displayDesc(book) }}</p>
+
+              <!-- Fake progress bar when "playing" -->
+              @if (playingId() === book.id) {
+                <mat-progress-bar mode="indeterminate" color="warn" class="audio-progress"></mat-progress-bar>
+                <p class="now-playing">
+                  <mat-icon>graphic_eq</mat-icon>
+                  {{ 'blog.now_playing' | translate }}
+                </p>
+              }
+
+              <!-- Meta row -->
+              <div class="audio-meta">
+                <span><mat-icon>schedule</mat-icon> {{ book.duration }}</span>
+                <span><mat-icon>save_alt</mat-icon> {{ book.size }}</span>
+              </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-actions class="audio-actions">
+              <button mat-stroked-button color="primary"
+                      (click)="togglePlay(book.id)">
+                <mat-icon>{{ playingId() === book.id ? 'pause' : 'play_arrow' }}</mat-icon>
+                {{ playingId() === book.id ? ('blog.btn_pause' | translate) : ('blog.btn_listen' | translate) }}
+              </button>
+              <button mat-flat-button color="warn"
+                      [matTooltip]="'blog.download_tooltip' | translate"
+                      (click)="downloadBook(book)">
+                <mat-icon>download</mat-icon>
+                {{ 'blog.btn_download' | translate }}
+              </button>
+            </mat-card-actions>
+
+          </mat-card>
+        }
+      </div>
+    }
+
+  </div>
+</section>

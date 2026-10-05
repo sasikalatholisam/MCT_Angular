@@ -1,0 +1,137 @@
+:host { display: block; }
+
+.lb-container {
+  position: relative;
+  background: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  width: min(92vw, 1000px);
+  max-height: 95vh;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ── Top bar ── */
+.lb-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  min-height: 48px;
+}
+
+.lb-album-caption {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.88rem;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.75rem;
+}
+
+.lb-topbar-actions {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.lb-btn {
+  color: rgba(255,255,255,0.75) !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-radius: 50% !important;
+  transition: background 0.2s !important;
+  &:hover { background: rgba(248,111,45,0.7) !important; color: #fff !important; }
+}
+
+/* ── Stage ── */
+.lb-stage {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.lb-nav {
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.75) !important;
+  background: rgba(255,255,255,0.1) !important;
+  border-radius: 50% !important;
+  margin: 0 0.4rem;
+  width: 44px !important;
+  height: 44px !important;
+  transition: background 0.2s !important;
+
+  &:hover:not([disabled]) { background: rgba(248,111,45,0.75) !important; color: #fff !important; }
+  &[disabled] { opacity: 0.25; pointer-events: none; }
+
+  mat-icon { font-size: 1.5rem; width: 1.5rem; height: 1.5rem; }
+}
+
+/* ── Image wrap ── */
+.lb-img-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.lb-img {
+  max-width: 100%;
+  max-height: 58vh;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+}
+
+/* ── Counter bar ── */
+.lb-counter-bar {
+  text-align: center;
+  padding: 0.3rem 0;
+}
+
+.lb-counter {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
+}
+
+/* ── Thumbnail strip ── */
+.lb-thumbs {
+  display: flex;
+  gap: 5px;
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.07);
+
+  &::-webkit-scrollbar { height: 3px; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 2px; }
+}
+
+.lb-thumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.2s, border-color 0.2s;
+
+  &.active { border-color: #f86f1e; opacity: 1; }
+  &:hover  { opacity: 0.85; }
+}
+
+.lb-thumb-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}

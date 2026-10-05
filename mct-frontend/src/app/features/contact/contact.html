@@ -1,0 +1,244 @@
+<!-- ══════════════════════════════════════════════════════════════════════
+     CONTACT PAGE — Premium Redesign
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── 1. Hero ── -->
+<div class="ct-hero">
+  <div class="ct-hero-bg"></div>
+  <div class="ct-hero-overlay"></div>
+  <div class="mct-container ct-hero-inner">
+    <p class="ct-breadcrumb">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'contact.title' | translate }}</span>
+    </p>
+    <h1>{{ 'contact.page_heading' | translate }}</h1>
+    <p class="ct-hero-sub">
+      We're always here to help. Reach out and we'll respond within 24 hours.
+    </p>
+  </div>
+  <!-- decorative OM watermark -->
+  <span class="ct-hero-om" aria-hidden="true">ॐ</span>
+</div>
+
+<!-- ── 2. Marquee ── -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span>
+    {{ 'marquee.contact' | translate }}
+    <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     3. Floating Info Cards
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="ct-info-section">
+  <div class="mct-container">
+    <div class="ct-info-grid">
+
+      <!-- Phone -->
+      <div class="ct-info-card">
+        <div class="ct-info-icon-wrap ct-icon-saffron">
+          <mat-icon>phone</mat-icon>
+        </div>
+        <div class="ct-info-content">
+          <p class="ct-info-label">{{ 'contact.call_label' | translate }}</p>
+          <p class="ct-info-value">+91 90425 59742</p>
+          <p class="ct-info-value">+91 70135 99491</p>
+        </div>
+        <a href="tel:+919042559742" class="ct-info-action">
+          <mat-icon>call</mat-icon> Call Now
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div class="ct-info-card ct-info-card-mid">
+        <div class="ct-info-icon-wrap ct-icon-gold">
+          <mat-icon>email</mat-icon>
+        </div>
+        <div class="ct-info-content">
+          <p class="ct-info-label">Email Us</p>
+          <p class="ct-info-value">
+            <a href="mailto:mctrust2014@gmail.com">{{ 'contact.email_address' | translate }}</a>
+          </p>
+          <p class="ct-info-value">
+            <a href="https://www.maharshicharitabletrust.com" target="_blank" rel="noopener">
+              {{ 'contact.website' | translate }}
+            </a>
+          </p>
+        </div>
+        <a href="mailto:mctrust2014@gmail.com" class="ct-info-action">
+          <mat-icon>send</mat-icon> Send Mail
+        </a>
+      </div>
+
+      <!-- Address -->
+      <div class="ct-info-card">
+        <div class="ct-info-icon-wrap ct-icon-green">
+          <mat-icon>location_on</mat-icon>
+        </div>
+        <div class="ct-info-content">
+          <p class="ct-info-label">Our Location</p>
+          <p class="ct-info-value">{{ 'contact.address' | translate }}</p>
+        </div>
+        <a href="https://maps.google.com/maps?q=Mellacheruvu,Pileru,Chittoor,AP"
+           target="_blank" rel="noopener" class="ct-info-action">
+          <mat-icon>map</mat-icon> View Map
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     4. Main Section — Form + Map (full new layout)
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="ct-main-section">
+  <div class="mct-container ct-main-grid">
+
+    <!-- ══ LEFT: Premium Form ══ -->
+    <div class="ct-form-wrap">
+
+      <!-- Form header -->
+      <div class="ct-form-top">
+        <div class="ct-form-icon-badge">
+          <mat-icon>chat_bubble_outline</mat-icon>
+        </div>
+        <div>
+          <p class="ct-form-eyebrow">Write to Us</p>
+          <h2>{{ 'contact.query' | translate }}</h2>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="ct-form">
+
+        <!-- Row 1: Name + Phone -->
+        <div class="ct-form-row">
+          <mat-form-field appearance="outline" class="ct-field">
+            <mat-label>{{ 'contact.name' | translate }}</mat-label>
+            <input matInput formControlName="name" maxlength="50" autocomplete="name" />
+            <mat-icon matSuffix>person</mat-icon>
+            @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+              <mat-error>Name is required.</mat-error>
+            } @else if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+              <mat-error>Minimum 3 characters required.</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="ct-field">
+            <mat-label>{{ 'contact.phone' | translate }}</mat-label>
+            <input matInput formControlName="phone" maxlength="10"
+                   inputmode="numeric" autocomplete="tel" />
+            <mat-icon matSuffix>phone</mat-icon>
+            @if (form.get('phone')?.hasError('required') && form.get('phone')?.touched) {
+              <mat-error>Phone number is required.</mat-error>
+            } @else if (form.get('phone')?.hasError('phone') && form.get('phone')?.touched) {
+              <mat-error>Enter a valid 10-digit Indian mobile number.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Row 2: Email -->
+        <mat-form-field appearance="outline" class="ct-field ct-field-full">
+          <mat-label>{{ 'contact.email' | translate }}</mat-label>
+          <input matInput formControlName="email" type="email"
+                 maxlength="50" autocomplete="email" />
+          <mat-icon matSuffix>email</mat-icon>
+          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+            <mat-error>Email is required.</mat-error>
+          } @else if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+            <mat-error>Enter a valid email address.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Row 3: Subject -->
+        <mat-form-field appearance="outline" class="ct-field ct-field-full">
+          <mat-label>{{ 'contact.subject' | translate }}</mat-label>
+          <input matInput formControlName="subject" maxlength="80" />
+          <mat-icon matSuffix>subject</mat-icon>
+          @if (form.get('subject')?.hasError('required') && form.get('subject')?.touched) {
+            <mat-error>Subject is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Row 4: Message -->
+        <mat-form-field appearance="outline" class="ct-field ct-field-full">
+          <mat-label>{{ 'contact.message' | translate }}</mat-label>
+          <textarea matInput formControlName="message" rows="5" maxlength="500"></textarea>
+          <mat-hint align="end">{{ form.get('message')?.value?.length ?? 0 }} / 500</mat-hint>
+          @if (form.get('message')?.hasError('required') && form.get('message')?.touched) {
+            <mat-error>Message is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Submit -->
+        <div class="ct-form-footer">
+          <p class="ct-form-note">
+            <mat-icon>lock</mat-icon>
+            Your information is private and will never be shared.
+          </p>
+          <button mat-flat-button type="submit" class="ct-submit-btn">
+            <mat-icon>send</mat-icon>
+            {{ 'contact.submit' | translate }}
+          </button>
+        </div>
+
+      </form>
+    </div><!-- /ct-form-wrap -->
+
+    <!-- ══ RIGHT: Map panel ══ -->
+    <div class="ct-map-wrap">
+
+      <!-- Map header -->
+      <div class="ct-map-header">
+        <div class="ct-map-header-icon">
+          <mat-icon>place</mat-icon>
+        </div>
+        <div>
+          <p class="ct-map-eyebrow">Find Us</p>
+          <h3>Naimisharanya Ashramam</h3>
+          <p class="ct-map-addr">{{ 'contact.address' | translate }}</p>
+        </div>
+      </div>
+
+      <!-- Map iframe -->
+      <div class="ct-map-frame">
+        <iframe
+          [src]="safeMapUrl"
+          width="100%"
+          height="100%"
+          style="border:0; display:block;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="MCT Location — Mellacheruvu, Pileru, Chittoor, AP">
+        </iframe>
+      </div>
+
+      <!-- Map quick links -->
+      <div class="ct-map-links">
+        <a href="https://maps.google.com/maps?q=Mellacheruvu,Pileru,Chittoor,AndhraPradesh,517214,India"
+           target="_blank" rel="noopener" class="ct-map-btn">
+          <mat-icon>open_in_new</mat-icon>
+          Open in Google Maps
+        </a>
+        <a href="https://maps.google.com/maps/dir//Mellacheruvu,Pileru,Chittoor,AP"
+           target="_blank" rel="noopener" class="ct-map-btn ct-map-btn-outline">
+          <mat-icon>directions</mat-icon>
+          Get Directions
+        </a>
+      </div>
+
+      <!-- Quick info chips below map -->
+      <div class="ct-map-chips">
+        <span class="ct-map-chip"><mat-icon>access_time</mat-icon> Open: 6 AM – 8 PM</span>
+        <span class="ct-map-chip"><mat-icon>calendar_today</mat-icon> All 7 Days</span>
+        <span class="ct-map-chip"><mat-icon>phone</mat-icon> +91 90425 59742</span>
+      </div>
+
+    </div><!-- /ct-map-wrap -->
+
+  </div>
+</section>

@@ -1,0 +1,449 @@
+// ── Donation Page — Premium Split Layout ──────────────────────────────────
+
+// ── 1. Hero ────────────────────────────────────────────────────────────────
+.don-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+}
+
+.don-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ashrm/aboutPageImages/about_bg_light_3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.don-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(90, 30, 0, 0.82) 0%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.don-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 3.5rem 0 4rem;
+}
+
+.don-hero-text {
+  max-width: 600px;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0.4rem 0 0;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.don-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #ffd6a5;
+  margin: 0;
+
+  mat-icon {
+    font-size: 0.9rem;
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}
+
+.don-hero-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.don-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.78rem;
+    border-radius: 20px;
+    padding: 0.3rem 0.75rem;
+
+    mat-icon {
+      font-size: 0.85rem;
+      width: 0.85rem;
+      height: 0.85rem;
+    }
+  }
+}
+
+// ── 3. Impact Band ─────────────────────────────────────────────────────────
+.don-impact-band {
+  background: #fff;
+  border-bottom: 1px solid #e8e3dc;
+  padding: 1.5rem 0;
+}
+
+.don-impact-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.don-impact-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+
+  mat-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--mct-saffron);
+  }
+}
+
+.don-impact-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--mct-deep);
+  line-height: 1;
+}
+
+.don-impact-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mct-muted);
+}
+
+.don-impact-divider {
+  width: 1px;
+  height: 48px;
+  background: #e8e3dc;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+// ── 4. Main Section ────────────────────────────────────────────────────────
+.don-main-section {
+  background: #faf8f5;
+  padding: 3.5rem 0;
+}
+
+.don-main-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: start;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Form Card ──────────────────────────────────────────────────────────────
+.don-form-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem;
+  border-top: 4px solid var(--mct-saffron);
+}
+
+.don-form-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--mct-deep);
+    margin: 0 0 0.2rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: var(--mct-muted);
+    margin: 0;
+  }
+}
+
+.don-form-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--mct-saffron) 0%, var(--mct-deep) 100%);
+  flex-shrink: 0;
+
+  mat-icon {
+    color: #fff;
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.don-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.don-name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.don-fw {
+  width: 100%;
+}
+
+.don-full {
+  width: 100%;
+}
+
+// Saffron focus colour for outline form fields
+.don-fw.mat-mdc-form-field.mat-focused,
+.don-full.mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: var(--mct-saffron) !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: var(--mct-saffron) !important;
+  }
+}
+
+// ── Quick Amount Chips ─────────────────────────────────────────────────────
+.don-quick-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.don-quick-label {
+  font-size: 0.75rem;
+  color: var(--mct-muted);
+  font-weight: 600;
+}
+
+.don-quick-btn {
+  background: #fff5ee;
+  border: 1px solid #f8d2b5;
+  color: var(--mct-saffron);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--mct-saffron);
+    color: #fff;
+    border-color: var(--mct-saffron);
+  }
+}
+
+// ── Submit Button ──────────────────────────────────────────────────────────
+.don-submit-btn {
+  background: linear-gradient(135deg, var(--mct-saffron) 0%, var(--mct-deep) 100%) !important;
+  color: #fff !important;
+  width: 100%;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px !important;
+  margin-top: 0.75rem;
+
+  mat-icon {
+    margin-right: 0.4rem;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #a03b00 0%, #7a2c00 100%) !important;
+  }
+}
+
+// ── Right Info Panel ───────────────────────────────────────────────────────
+.don-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// ── Bank Card ──────────────────────────────────────────────────────────────
+.don-bank-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  border-left: 4px solid var(--mct-saffron);
+}
+
+.don-bank-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mct-deep);
+    margin: 0 0 0.2rem;
+  }
+
+  p {
+    font-size: 0.78rem;
+    color: var(--mct-muted);
+    margin: 0;
+  }
+}
+
+.don-bank-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mct-saffron);
+  flex-shrink: 0;
+
+  mat-icon {
+    color: #fff;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.don-bank-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.don-bank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f0ede8;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.don-bank-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--mct-muted);
+
+  mat-icon {
+    font-size: 0.85rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--mct-saffron);
+  }
+}
+
+.don-bank-val {
+  font-size: 0.82rem;
+  color: var(--mct-text);
+  font-weight: 500;
+  text-align: right;
+  max-width: 60%;
+}
+
+// ── Why Donate Card ────────────────────────────────────────────────────────
+.don-why-card {
+  background: linear-gradient(135deg, #fff8f0, #fff3e0);
+  border: 1px solid rgba(248, 111, 45, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mct-deep);
+    margin: 0 0 1rem;
+  }
+}
+
+.don-why-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--mct-text);
+    line-height: 1.5;
+
+    mat-icon {
+      font-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+      color: #4caf50;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+  }
+}
+
+// ── Snackbar override (keep from original) ─────────────────────────────────
+.mct-snack {
+  --mdc-snackbar-container-color: var(--mct-deep);
+  --mdc-snackbar-supporting-text-color: white;
+}

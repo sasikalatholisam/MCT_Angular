@@ -1,0 +1,583 @@
+// Angular Material theme — MCT brand colours (orange/saffron palette)
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$orange-palette,
+        tertiary: mat.$yellow-palette,
+      ),
+      typography: Poppins,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  margin: 0;
+}
+/* ═══════════════════════════════════════════════════════
+   MCT Angular — Global Styles
+   Derived from old site: style.scss (Bootstrap 4 theme)
+   Converted to pure CSS / Angular-compatible SCSS
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Design Tokens (CSS Variables) ── */
+:root {
+  /* Brand colours — matched to old site $primary #f86f2d family */
+  --mct-saffron: #f86f2d; /* old $primary  */
+  --mct-deep: #c94b00; /* old $secondary darkened */
+  --mct-gold: #faaa3a; /* old $tertiary */
+  --mct-green: #7cbd1e; /* old $quarternary */
+
+  /* Neutrals */
+  --mct-white: #ffffff;
+  --mct-light-bg: #f9f6f2; /* old bg-light */
+  --mct-text: #1a1a1a;
+  --mct-muted: #4a5562; /* old $darken */
+  --mct-border: #e8d5c0;
+
+  /* Layout */
+  --mct-max-width: 1200px;
+  --mct-section-py: 5rem; /* old padding: 7em 0 */
+  --mct-radius: 4px; /* old border-radius */
+
+  /* Transitions */
+  --mct-transition: 0.3s all ease;
+}
+
+/* ── Base Typography ── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', 'Overpass', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--mct-muted);
+  background: var(--mct-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Telugu language class */
+.telugu,
+:lang(te) {
+  font-family: 'Noto Sans Telugu', 'Poppins', sans-serif;
+}
+
+/* ── Headings ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', 'Dosis', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--mct-text);
+}
+
+/* ── Links ── */
+a {
+  color: var(--mct-saffron);
+  text-decoration: none;
+  transition: var(--mct-transition);
+
+  &:hover {
+    color: var(--mct-deep);
+    text-decoration: none;
+  }
+}
+
+/* ── Layout Shell — ensure footer sticks to bottom ── */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* ── Section Defaults ── */
+.mct-section {
+  padding: var(--mct-section-py) 0;
+}
+
+.mct-section-light {
+  padding: var(--mct-section-py) 0;
+  background: var(--mct-light-bg);
+}
+
+.mct-container {
+  max-width: var(--mct-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* ── Section Heading ── */
+.mct-section-heading {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--mct-text);
+    margin-bottom: 0.75rem;
+    position: relative;
+    display: inline-block;
+
+    /* underline accent — like old heading-section */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--mct-saffron);
+      border-radius: 2px;
+    }
+  }
+
+  p {
+    color: var(--mct-muted);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+  }
+}
+
+/* ── Page Hero Banner (like old .hero-wrap) ── */
+.page-hero {
+  width: 100%;
+  min-height: 320px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--mct-white);
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--mct-white);
+      margin-bottom: 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
+    }
+
+    .breadcrumbs {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.75);
+
+      a {
+        color: var(--mct-white);
+        &:hover {
+          color: var(--mct-gold);
+        }
+      }
+
+      span + span::before {
+        content: ' / ';
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+/* ── Marquee Quote Strip (like old <marquee>) ── */
+.mct-marquee {
+  background: var(--mct-saffron);
+  color: var(--mct-white);
+  font-size: 0.85rem;
+  padding: 0.45rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .marquee-track {
+    display: inline-block;
+    animation: marquee-scroll 30s linear infinite;
+  }
+
+  .om {
+    color: var(--mct-gold);
+    font-weight: 600;
+    margin: 0 0.5rem;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ── Cards (like old .blog-entry / .cause-entry) ── */
+.mct-card {
+  background: var(--mct-white);
+  border: 1px solid #f0f0f0;
+  border-radius: var(--mct-radius);
+  overflow: hidden;
+  box-shadow: 0 3px 66px -24px rgba(0, 0, 0, 0.2);
+  transition: var(--mct-transition);
+
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+  }
+
+  .card-img {
+    width: 100%;
+    height: 270px; /* old .block-20 height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.5rem;
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--mct-text);
+    }
+
+    p {
+      font-size: 0.88rem;
+      color: var(--mct-muted);
+      line-height: 1.6;
+    }
+  }
+}
+
+/* ── Info Blocks (like old .block-18 color-1 / color-2) ── */
+.mct-block-primary {
+  background: var(--mct-saffron);
+  color: var(--mct-white);
+  padding: 2rem;
+  border-radius: var(--mct-radius);
+
+  h3,
+  p,
+  span {
+    color: var(--mct-white);
+  }
+}
+
+.mct-block-secondary {
+  background: var(--mct-gold);
+  color: var(--mct-text);
+  padding: 2rem;
+  border-radius: var(--mct-radius);
+}
+
+/* ── Buttons ── */
+.mct-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--mct-radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: var(--mct-transition);
+  text-decoration: none;
+}
+
+.mct-btn-primary {
+  @extend .mct-btn;
+  background: var(--mct-saffron);
+  color: var(--mct-white);
+
+  &:hover {
+    background: var(--mct-deep);
+    color: var(--mct-white);
+  }
+}
+
+.mct-btn-outline {
+  @extend .mct-btn;
+  background: transparent;
+  border: 1px solid var(--mct-saffron);
+  color: var(--mct-saffron);
+
+  &:hover {
+    background: var(--mct-saffron);
+    color: var(--mct-white);
+  }
+}
+
+.mct-btn-white {
+  @extend .mct-btn;
+  background: var(--mct-white);
+  color: var(--mct-saffron);
+
+  &:hover {
+    background: var(--mct-gold);
+    color: var(--mct-white);
+  }
+}
+
+/* ── Form Controls (like old volunteer-form) ── */
+.mct-form {
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--mct-text);
+      margin-bottom: 0.35rem;
+
+      &.required::after {
+        content: ' *';
+        color: #e53e3e;
+      }
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border: 1px solid var(--mct-border);
+      border-radius: var(--mct-radius);
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--mct-text);
+      background: var(--mct-white);
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: var(--mct-saffron);
+        box-shadow: 0 0 0 3px rgba(248, 111, 45, 0.15);
+      }
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+}
+
+/* ── Contact Info Block (like old .block-23) ── */
+.mct-contact-info {
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--mct-muted);
+
+      i {
+        color: var(--mct-saffron);
+        font-size: 1rem;
+        margin-top: 0.15rem;
+        flex-shrink: 0;
+        width: 18px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* ── Overlay utility (like old .overlay) ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* ── Volunteer / CTA section bg (like old .ftco-section-3) ── */
+.mct-cta-section {
+  position: relative;
+  padding: var(--mct-section-py) 0;
+  background-size: cover;
+  background-position: center;
+
+  .overlay {
+    background: rgba(248, 111, 45, 0.88); /* saffron overlay */
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    color: var(--mct-white);
+
+    h3 {
+      color: var(--mct-white);
+    }
+    p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+/* ── Footer layout helper ── */
+.footer-main {
+  .contact-list {
+    li {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+/* ── Loader (like old #ftco-loader) ── */
+.mct-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--mct-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #eee;
+    border-top-color: var(--mct-saffron);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Responsive Utilities ── */
+@media (max-width: 1024px) {
+  .mct-container {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --mct-section-py: 3rem;
+  }
+
+  .mct-container {
+    padding: 0 1rem;
+  }
+
+  .mct-section-heading h2 {
+    font-size: 1.5rem;
+  }
+
+  .mct-section-heading {
+    margin-bottom: 2rem;
+  }
+
+  /* Page hero smaller on mobile */
+  .page-hero {
+    min-height: 220px;
+
+    .hero-content h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --mct-section-py: 2.25rem;
+  }
+
+  .mct-container {
+    padding: 0 0.875rem;
+  }
+
+  .mct-section-heading h2 {
+    font-size: 1.25rem;
+  }
+
+  /* Cards stack on tiny phones */
+  .mct-card .card-img {
+    height: 200px;
+  }
+
+  /* Buttons full-width on tiny screens */
+  .mct-btn,
+  .mct-btn-primary,
+  .mct-btn-outline,
+  .mct-btn-white {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Event detail bottom sheet global style ── */
+.event-detail-sheet .mat-bottom-sheet-container {
+  border-radius: 16px 16px 0 0;
+  padding: 0;
+  overflow: hidden;
+  max-height: 90vh;
+}
+
+/* ── Material snackbar MCT theme ── */
+.mct-snack {
+  --mdc-snackbar-container-color: #c94b00;
+  --mdc-snackbar-supporting-text-color: white;
+}

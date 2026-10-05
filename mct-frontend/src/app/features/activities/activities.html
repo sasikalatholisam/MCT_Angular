@@ -1,0 +1,100 @@
+<!-- ══════════════════════════════════════════════════════════════════════
+     ACTIVITIES PAGE — Premium Redesign
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── 1. Page Hero ── -->
+<div class="act-hero">
+  <div class="act-hero-bg"></div>
+  <div class="act-hero-overlay"></div>
+  <div class="act-hero-content">
+    <p class="act-breadcrumb">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'nav.activities' | translate }}</span>
+    </p>
+    <h1>{{ 'nav.activities' | translate }}</h1>
+    <p class="act-hero-sub">Compassion in Action — Our Mission Across Communities</p>
+  </div>
+  <!-- decorative OM watermark -->
+  <div class="act-hero-om" aria-hidden="true">ॐ</div>
+</div>
+
+<!-- ── Marquee ── -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.about' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     Section 1 — What We Do (Feature Grid)
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="mct-section-light">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <h2>{{ 'about.activities_title' | translate }}</h2>
+      <p>{{ 'about.activities_text1' | translate }}</p>
+    </div>
+
+    <div class="act-feature-grid">
+      @for (act of activities; track $index) {
+        <div class="act-feature-item">
+          <div class="act-feat-icon-wrap">
+            <mat-icon>{{ activityIcons[$index % activityIcons.length] }}</mat-icon>
+          </div>
+          <span class="act-feat-num">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+          <h4>{{ act.title }}</h4>
+          <p>{{ act.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CTA Band — Stats Strip
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="act-cta-band">
+  <div class="act-cta-overlay"></div>
+  <div class="mct-container act-cta-inner">
+    <div class="act-cta-text">
+      <h2>Join Our Mission</h2>
+      <p>Together we can serve thousands of underprivileged communities</p>
+    </div>
+    <div class="act-cta-stats">
+      <div class="act-stat"><span class="act-stat-n">50K+</span><span>Lives Impacted</span></div>
+      <div class="act-stat"><span class="act-stat-n">6+</span><span>Meditation Centres</span></div>
+      <div class="act-stat"><span class="act-stat-n">10+</span><span>Years Active</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     Section 2 — Our Outreach (Magazine Photo Cards)
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="mct-section">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <h2>{{ 'about.outreach_title' | translate }}</h2>
+    </div>
+
+    <div class="act-photo-grid">
+      @for (card of cards; track $index) {
+        <div class="act-photo-card">
+          <div class="act-photo-img">
+            <div [style.background-image]="'url(' + card.img + ')'"></div>
+            <span class="act-tag">Outreach</span>
+          </div>
+          <div class="act-photo-body">
+            <h3>{{ card.titleKey | translate }}</h3>
+            <p>{{ card.descKey | translate }}</p>
+            <a class="act-read-link" href="#">
+              Read More
+              <mat-icon>arrow_forward</mat-icon>
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

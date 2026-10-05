@@ -1,0 +1,455 @@
+<!-- HOME PAGE -->
+
+<!-- ── Split Hero: left static temple | right auto-cycling slideshow ── -->
+<section class="split-hero">
+
+  <!-- LEFT PANEL — static temple image -->
+  <div class="split-hero-left">
+    <div class="split-hero-static"
+         style="background-image: url('images/ashrm/homePageImages/home_bg1.png')">
+    </div>
+    <!-- Dark gradient overlay -->
+    <div class="split-hero-overlay"></div>
+
+    <!-- Brand text on top of static side -->
+    <div class="split-hero-brand">
+      <img src="mct_logo.png" alt="MCT" class="hero-logo" />
+      <h2>{{ 'brand.name' | translate }}</h2>
+      <p>{{ 'brand.tagline' | translate }}</p>
+      <a routerLink="/donation" class="hero-donate-btn">
+        <mat-icon>favorite</mat-icon>
+        {{ 'nav.donate_btn' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — auto-cycling slideshow -->
+  <div class="split-hero-right">
+
+    <!-- Slides -->
+    @for (slide of heroSlides; track slide.img; let i = $index) {
+      <div class="hero-slide"
+           [class.visible]="i === heroSlide()"
+           [style.background-image]="'url(' + slide.img + ')'">
+      </div>
+    }
+
+    <!-- Caption bar on top of slideshow -->
+    <div class="slide-caption" [class.fade-in]="heroVisible()">
+      <span class="slide-caption-text">{{ heroSlides[heroSlide()].caption }}</span>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="hero-dots">
+      @for (slide of heroSlides; track slide.img; let i = $index) {
+        <button class="hero-dot"
+                [class.active]="i === heroSlide()"
+                (click)="goHeroSlide(i)"
+                [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      }
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ── Marquee ────────────────────────────────────────────────────────── -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.home' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ── MCT + Vision two-tone strip ───────────────────────────────────── -->
+<section class="mct-intro-strip">
+  <div class="intro-block color-saffron">
+    <h3>{{ 'home.mct_title' | translate }}</h3>
+    <p>{{ 'home.mct_intro' | translate }}</p>
+  </div>
+  <div class="intro-block color-gold">
+    <h3>{{ 'home.vision_title' | translate }}</h3>
+    <p>{{ 'home.vision_text' | translate }}</p>
+  </div>
+</section>
+
+<!-- ── Activity Image Carousel ───────────────────────────────────────── -->
+<section class="mct-section-light">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <h2>{{ 'nav.activities' | translate }}</h2>
+    </div>
+
+    <div class="carousel-wrap">
+      <div class="carousel-stage">
+        <div class="carousel-slide"
+             [style.background-image]="'url(' + activitySlides[activeSlide()].img + ')'">
+          <div class="carousel-caption">
+            <h3>{{ activitySlides[activeSlide()].title }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-arrow left" (click)="prevSlide()" aria-label="Previous">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button class="carousel-arrow right" (click)="nextSlide()" aria-label="Next">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+
+      <!-- Dots -->
+      <div class="carousel-dots">
+        @for (slide of activitySlides; track $index) {
+          <button class="dot"
+                  [class.active]="activeSlide() === $index"
+                  (click)="goTo($index)"
+                  [attr.aria-label]="'Go to slide ' + ($index + 1)">
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Blog section (tabbed) ─────────────────────────────────────────── -->
+<section class="mct-section blog-tabs-section">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <h2>{{ 'home.blog_title' | translate }}</h2>
+      <p class="section-subtitle">{{ 'home.blog_subtitle' | translate }}</p>
+    </div>
+
+    <mat-tab-group animationDuration="300ms" class="blog-tab-group">
+
+      @for (tab of blogTabs; track tab.label) {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">{{ tab.icon }}</mat-icon>
+            <span>{{ tab.label }}</span>
+          </ng-template>
+
+          <div class="blog-tab-cards">
+            @for (post of tab.posts; track post.title) {
+              <mat-card class="blog-tab-card" appearance="outlined">
+                <div class="blog-tab-card-img"
+                     [style.background-image]="'url(' + post.img + ')'">
+                  <span class="blog-tab-tag">{{ post.tag }}</span>
+                </div>
+                <mat-card-content class="blog-tab-card-body">
+                  <p class="blog-tab-date">
+                    <mat-icon>calendar_today</mat-icon>{{ post.date }}
+                  </p>
+                  <h3>{{ post.title }}</h3>
+                  <p>{{ post.desc }}</p>
+                </mat-card-content>
+              </mat-card>
+            }
+          </div>
+        </mat-tab>
+      }
+
+    </mat-tab-group>
+  </div>
+</section>
+
+<!-- ── Latest Events — Tirumala-style Calendar + Day Schedules ───────── -->
+<section class="mct-section-light events-cal-section">
+  <div class="mct-container">
+
+    <div class="mct-section-heading">
+      <h2>{{ 'home.events_title' | translate }}</h2>
+    </div>
+
+    <div class="cal-layout">
+
+      <!-- ════════════════════════════════════
+           LEFT: Mini Calendar
+      ════════════════════════════════════ -->
+      <div class="cal-panel">
+
+        <!-- Month navigation header -->
+        <div class="cal-header">
+          <button class="cal-nav-btn" (click)="calPrevMonth()" matTooltip="Previous month">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <div class="cal-month-label">
+            <span class="cal-month-name">{{ monthNames[calMonth()] }}</span>
+            <span class="cal-year">{{ calYear() }}</span>
+          </div>
+          <button class="cal-nav-btn" (click)="calNextMonth()" matTooltip="Next month">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+
+        <!-- Today button -->
+        <div class="cal-today-row">
+          <button class="cal-today-btn" (click)="goToday()">
+            <mat-icon>today</mat-icon> Today
+          </button>
+        </div>
+
+        <!-- Day-of-week labels -->
+        <div class="cal-grid">
+          @for (d of dayNames; track d) {
+            <div class="cal-day-name">{{ d }}</div>
+          }
+
+          <!-- Calendar day cells -->
+          @for (cell of calendarDays(); track $index) {
+            @if (cell === null) {
+              <div class="cal-cell cal-cell-empty"></div>
+            } @else {
+              <button class="cal-cell"
+                      [class.is-today]="isToday(cell)"
+                      [class.is-selected]="selectedDay() === cell"
+                      [class.has-event]="hasEvents(cell)"
+                      (click)="selectDay(cell)"
+                      [matTooltip]="hasEvents(cell) ? eventsOnDay(cell).length + ' event(s)' : ''">
+                <span class="cal-day-num">{{ cell }}</span>
+                @if (hasEvents(cell)) {
+                  <span class="cal-event-dots">
+                    @for (ev of eventsOnDay(cell).slice(0,3); track ev.id) {
+                      <span class="cal-dot"
+                            [style.background]="categoryColor[ev.category]"></span>
+                    }
+                  </span>
+                }
+              </button>
+            }
+          }
+        </div>
+
+        <!-- Category legend -->
+        <div class="cal-legend">
+          @for (entry of categoryColor | keyvalue; track entry.key) {
+            <div class="legend-item">
+              <span class="legend-dot" [style.background]="entry.value"></span>
+              <span>{{ entry.key }}</span>
+            </div>
+          }
+        </div>
+
+      </div><!-- /cal-panel -->
+
+      <!-- ════════════════════════════════════
+           RIGHT: Tirumala-style scrolling Day Schedule
+      ════════════════════════════════════ -->
+      <div class="schedule-panel">
+
+        <!-- Header -->
+        <div class="schedule-header">
+          <mat-icon>event_note</mat-icon>
+          <span>MCT Day Schedules</span>
+          <span class="sched-header-hint">Hover to pause scroll</span>
+        </div>
+
+        <!-- ★ Scrolling marquee viewport — fixed height, overflow hidden -->
+        <div class="sched-marquee-viewport">
+
+          <!--
+            Inner track: CSS animation scrolls it upward continuously.
+            Content is duplicated so the scroll loops seamlessly.
+            Hovering pauses animation-play-state via CSS.
+          -->
+          <div class="sched-marquee-track">
+
+            <!-- BLOCK A (real content) -->
+            <div class="sched-marquee-content">
+              @for (ev of allEvents; track ev.id) {
+                <div class="sched-row">
+                  <div class="sched-row-time"
+                       [style.color]="categoryColor[ev.category]">
+                    {{ formatTime(ev.time) }}
+                  </div>
+                  <div class="sched-row-body">
+                    <span class="sched-row-title">{{ ev.title }}</span>
+                    <span class="sched-row-venue">
+                      <mat-icon>location_on</mat-icon>{{ ev.venue }}
+                    </span>
+                  </div>
+                  <span class="sched-row-badge"
+                        [style.background]="categoryColor[ev.category]">
+                    {{ ev.category }}
+                  </span>
+                </div>
+              }
+            </div>
+
+            <!-- BLOCK B (duplicate for seamless loop) -->
+            <div class="sched-marquee-content" aria-hidden="true">
+              @for (ev of allEvents; track ev.id) {
+                <div class="sched-row">
+                  <div class="sched-row-time"
+                       [style.color]="categoryColor[ev.category]">
+                    {{ formatTime(ev.time) }}
+                  </div>
+                  <div class="sched-row-body">
+                    <span class="sched-row-title">{{ ev.title }}</span>
+                    <span class="sched-row-venue">
+                      <mat-icon>location_on</mat-icon>{{ ev.venue }}
+                    </span>
+                  </div>
+                  <span class="sched-row-badge"
+                        [style.background]="categoryColor[ev.category]">
+                    {{ ev.category }}
+                  </span>
+                </div>
+              }
+            </div>
+
+          </div><!-- /track -->
+        </div><!-- /viewport -->
+
+        <!-- Legend + View all -->
+        <div class="sched-footer-row">
+          <div class="cal-legend sched-legend">
+            @for (entry of categoryColor | keyvalue; track entry.key) {
+              <div class="legend-item">
+                <span class="legend-dot" [style.background]="entry.value"></span>
+                <span>{{ entry.key }}</span>
+              </div>
+            }
+          </div>
+          <a routerLink="/events" class="view-all-link">
+            Full Calendar <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </div>
+
+      </div><!-- /schedule-panel -->
+
+    </div><!-- /cal-layout -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     Contact Us — Premium Split Section
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="contact-home-section">
+
+  <!-- ── LEFT PANEL — dark saffron info band ── -->
+  <div class="contact-info-panel">
+
+    <!-- decorative OM watermark -->
+    <span class="contact-om-bg" aria-hidden="true">ॐ</span>
+
+    <div class="contact-info-inner">
+      <p class="contact-eyebrow">Get in Touch</p>
+      <h2 class="contact-info-heading">{{ 'contact.title' | translate }}</h2>
+      <p class="contact-info-sub">
+        We'd love to hear from you. Reach out for any queries,
+        partnerships, or volunteer opportunities.
+      </p>
+
+      <!-- Contact cards -->
+      <div class="contact-detail-list">
+
+        <div class="contact-detail-item">
+          <span class="contact-detail-icon">
+            <mat-icon>location_on</mat-icon>
+          </span>
+          <div>
+            <p class="contact-detail-label">Our Address</p>
+            <p class="contact-detail-value">{{ 'contact.address' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="contact-detail-item">
+          <span class="contact-detail-icon">
+            <mat-icon>phone</mat-icon>
+          </span>
+          <div>
+            <p class="contact-detail-label">Call Us</p>
+            <p class="contact-detail-value">+91 90425 59742</p>
+            <p class="contact-detail-value">+91 70135 99491</p>
+          </div>
+        </div>
+
+        <div class="contact-detail-item">
+          <span class="contact-detail-icon">
+            <mat-icon>email</mat-icon>
+          </span>
+          <div>
+            <p class="contact-detail-label">Email Us</p>
+            <p class="contact-detail-value">mctrust2014&#64;gmail.com</p>
+          </div>
+        </div>
+
+      </div><!-- /contact-detail-list -->
+
+      <!-- Quick action button -->
+      <a routerLink="/contact" class="contact-full-link">
+        <mat-icon>open_in_new</mat-icon> View Full Contact Page
+      </a>
+    </div>
+  </div><!-- /contact-info-panel -->
+
+  <!-- ── RIGHT PANEL — glass form ── -->
+  <div class="contact-form-panel">
+    <div class="contact-form-glass">
+
+      <div class="contact-form-header">
+        <span class="contact-form-icon-wrap">
+          <mat-icon>volunteer_activism</mat-icon>
+        </span>
+        <div>
+          <h3>{{ 'home.volunteer_form_title' | translate }}</h3>
+          <p>Fill in the form and we'll reach out to you shortly.</p>
+        </div>
+      </div>
+
+      <form [formGroup]="volunteerForm" (ngSubmit)="onVolunteerSubmit()" novalidate
+            class="contact-reactive-form">
+
+        <!-- Row 1: Name + Phone -->
+        <div class="contact-form-row">
+          <mat-form-field appearance="outline" class="cfw">
+            <mat-label>{{ 'home.form_name' | translate }}</mat-label>
+            <input matInput formControlName="name" maxlength="50" autocomplete="name" />
+            <mat-icon matSuffix>person</mat-icon>
+            @if (volunteerForm.get('name')?.invalid && volunteerForm.get('name')?.touched) {
+              <mat-error>Name required (min 3 chars).</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="cfw">
+            <mat-label>{{ 'home.form_phone' | translate }}</mat-label>
+            <input matInput formControlName="phone" type="tel" maxlength="10" />
+            <mat-icon matSuffix>phone</mat-icon>
+            @if (volunteerForm.get('phone')?.invalid && volunteerForm.get('phone')?.touched) {
+              <mat-error>Valid 10-digit number required.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Row 2: Email -->
+        <mat-form-field appearance="outline" class="cfw cfw-full">
+          <mat-label>{{ 'home.form_email' | translate }}</mat-label>
+          <input matInput formControlName="email" type="email" />
+          <mat-icon matSuffix>email</mat-icon>
+          @if (volunteerForm.get('email')?.invalid && volunteerForm.get('email')?.touched) {
+            <mat-error>Valid e-mail address required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Row 3: Message -->
+        <mat-form-field appearance="outline" class="cfw cfw-full">
+          <mat-label>{{ 'home.form_message' | translate }}</mat-label>
+          <textarea matInput formControlName="message" rows="3" maxlength="500"></textarea>
+          <mat-hint align="end">{{ volunteerForm.get('message')?.value?.length ?? 0 }} / 500</mat-hint>
+          @if (volunteerForm.get('message')?.invalid && volunteerForm.get('message')?.touched) {
+            <mat-error>Please write a short message.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Submit -->
+        <button mat-flat-button type="submit" class="contact-submit-btn">
+          <mat-icon>send</mat-icon>
+          {{ 'home.form_submit' | translate }}
+        </button>
+
+      </form>
+    </div>
+  </div><!-- /contact-form-panel -->
+
+</section>

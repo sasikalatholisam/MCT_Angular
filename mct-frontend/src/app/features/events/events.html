@@ -1,0 +1,194 @@
+<!-- EVENTS PAGE -->
+
+<!-- 1. Hero -->
+<div class="events-hero">
+  <div class="events-hero-bg"></div>
+  <div class="events-hero-overlay"></div>
+  <div class="events-hero-content">
+    <p class="events-breadcrumb">
+      <a routerLink="/">Home</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'events.title' | translate }}</span>
+    </p>
+    <h1>{{ 'events.page_heading' | translate }}</h1>
+    <p class="events-hero-sub">Explore our spiritual and community events calendar</p>
+    <div class="events-hero-legend">
+      @for (cat of categories; track cat) {
+        @if (cat !== 'All') {
+          <span class="evh-legend-item">
+            <span class="evh-dot" [style.background]="categoryColor[cat]"></span>
+            {{ cat }}
+          </span>
+        }
+      }
+    </div>
+  </div>
+  <!-- MCT-style text watermark -->
+  <div class="events-hero-watermark" aria-hidden="true">2026</div>
+</div>
+
+<!-- 2. Marquee -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span>
+    {{ 'marquee.events' | translate }}
+    <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     3. INTERACTIVE CALENDAR
+     ══════════════════════════════════════════ -->
+<section class="mct-section-light">
+  <div class="mct-container">
+
+    <div class="mct-section-heading">
+      <p class="events-eyebrow">Event Calendar</p>
+      <h2>{{ 'events.calendar_title' | translate }}</h2>
+    </div>
+
+    <mat-card class="cal-card" appearance="outlined">
+
+      <!-- Calendar header — month + year dropdowns -->
+      <div class="cal-header">
+        <mat-icon class="cal-icon">calendar_month</mat-icon>
+
+        <!-- Month select -->
+        <mat-form-field appearance="outline" class="cal-select-field">
+          <mat-select
+            [ngModel]="currentMonth()"
+            (ngModelChange)="onMonthChange($event)">
+            @for (m of selectableMonths(); track m.idx) {
+              <mat-option [value]="m.idx" [disabled]="m.disabled">{{ m.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Year select -->
+        <mat-form-field appearance="outline" class="cal-select-field cal-year-field">
+          <mat-select
+            [ngModel]="currentYear()"
+            (ngModelChange)="onYearChange($event)">
+            <mat-option [value]="todayYear">{{ todayYear }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <!-- Day-name header row -->
+      <div class="cal-day-names">
+        @for (d of dayNames; track d) {
+          <div class="day-name">{{ d }}</div>
+        }
+      </div>
+
+      <!-- Calendar grid -->
+      <div class="cal-grid">
+        @for (day of calendarDays(); track $index) {
+          <div
+            class="cal-cell"
+            [class.empty]="day === null"
+            [class.today]="day !== null && isToday(day)"
+            [class.has-events]="day !== null && eventsOnDay(day).length > 0"
+            (click)="onDayClick(day)">
+
+            @if (day !== null) {
+              <span class="day-num">{{ day }}</span>
+
+              <!-- Coloured event dots -->
+              @for (ev of eventsOnDay(day); track ev.id) {
+                <span
+                  class="ev-dot"
+                  [style.background]="categoryColor[ev.category] || '#f86f2d'"
+                  [matTooltip]="ev.title + ' · ' + ev.time">
+                </span>
+              }
+            }
+          </div>
+        }
+      </div>
+
+    </mat-card>
+
+    <!-- Category colour legend -->
+    <div class="legend-row">
+      @for (cat of categories; track cat) {
+        @if (cat !== 'All') {
+          <span class="legend-item">
+            <span class="legend-dot" [style.background]="categoryColor[cat]"></span>
+            {{ cat }}
+          </span>
+        }
+      }
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     4. EVENT CARDS — click to view details
+     ══════════════════════════════════════════ -->
+<section class="mct-section">
+  <div class="mct-container">
+
+    <div class="mct-section-heading" style="margin-bottom:1.5rem">
+      <p class="events-eyebrow">Browse Events</p>
+      <h2>{{ 'events.page_heading' | translate }}</h2>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="filter-row">
+      <mat-chip-set aria-label="Category filter">
+        @for (cat of categories; track cat) {
+          <mat-chip
+            [highlighted]="activeCategory() === cat"
+            (click)="activeCategory.set(cat)">
+            {{ cat }}
+          </mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="events-grid">
+      @for (ev of filteredEvents(); track ev.id) {
+        <mat-card
+          class="event-card"
+          appearance="outlined"
+          (click)="openDetail(ev)"
+          matTooltip="Click to view details"
+          matTooltipPosition="above">
+
+          <!-- Image -->
+          <div class="event-img" [style.background-image]="'url(' + ev.img + ')'">
+            <span class="event-cat-badge"
+                  [style.background]="categoryColor[ev.category] || '#f86f2d'">
+              {{ ev.category }}
+            </span>
+            <div class="event-img-hover">
+              <mat-icon>open_in_full</mat-icon>
+            </div>
+          </div>
+
+          <!-- Coloured stripe indicator -->
+          <div class="event-stripe" [style.background]="categoryColor[ev.category] || '#f86f2d'"></div>
+
+          <mat-card-content class="event-body">
+            <h3>{{ ev.title }}</h3>
+            <p class="event-meta">
+              <mat-icon>calendar_today</mat-icon>
+              {{ ev.date | date:'dd MMM yyyy' }}
+              @if (ev.time) { <span class="ev-time">· {{ ev.time }}</span> }
+            </p>
+            <p class="event-meta">
+              <mat-icon>location_on</mat-icon> {{ ev.venue }}
+            </p>
+            <p class="event-desc">{{ ev.description }}</p>
+          </mat-card-content>
+
+        </mat-card>
+      }
+    </div>
+
+  </div>
+</section>

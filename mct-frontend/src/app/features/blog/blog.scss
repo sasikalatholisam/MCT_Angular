@@ -1,0 +1,307 @@
+/* ── Hero — Management-style: separate bg div + overlay + watermark ── */
+.blog-hero {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+
+  @media (max-width: 768px) { min-height: 300px; }
+}
+
+.blog-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ashrm/gallery/gallery_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+
+  @media (max-width: 768px) { background-attachment: scroll; }
+}
+
+.blog-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, rgba(60, 10, 0, 0.82) 0%, rgba(0, 0, 0, 0.65) 100%);
+  z-index: 1;
+}
+
+.blog-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 1.5rem 3rem;
+  width: 100%;
+  max-width: var(--mct-container-max, 1200px);
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0.4rem 0 0.5rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+
+    @media (max-width: 768px) { font-size: 2rem; }
+    @media (max-width: 480px) { font-size: 1.6rem; }
+  }
+}
+
+.blog-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 0.5rem;
+
+  a { color: #ffd6a5; text-decoration: none; &:hover { color: #fff; } }
+  mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+}
+
+.blog-hero-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 0.75rem;
+}
+
+.blog-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+
+    mat-icon { font-size: 0.85rem; width: 0.85rem; height: 0.85rem; color: #ffd6a5; }
+  }
+}
+
+.blog-hero-watermark {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 1;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+/* ── Header row ── */
+.blog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-header-text {
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--mct-text);
+    margin: 0 0 0.35rem;
+
+    mat-icon { color: var(--mct-saffron); font-size: 1.6rem; width: 1.6rem; height: 1.6rem; }
+  }
+
+  p { color: var(--mct-muted); font-size: 0.9rem; margin: 0; }
+}
+
+.blog-search {
+  min-width: 240px;
+  max-width: 320px;
+}
+
+/* ── Filter chips ── */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  justify-content: flex-start;
+
+  .filter-chip {
+    cursor: pointer;
+    &.mat-mdc-chip-highlighted { background: var(--mct-saffron) !important; color: white !important; }
+  }
+}
+
+.result-count {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--mct-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+
+  mat-icon { font-size: 1rem; width: 1rem; height: 1rem; color: var(--mct-saffron); }
+}
+
+/* ── Audio grid ── */
+.audio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 640px)  { grid-template-columns: 1fr; }
+}
+
+/* ── Audio card ── */
+.audio-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: var(--mct-transition);
+
+  &:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+}
+
+/* Cover art */
+.audio-cover {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: #1a1a2e;
+}
+
+.audio-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn {
+  color: white !important;
+  transform: scale(1.6);
+  transition: transform 0.2s;
+
+  mat-icon { font-size: 2.5rem; width: 2.5rem; height: 2.5rem; }
+
+  &.playing mat-icon { color: #ffcc02; }
+  &:hover { transform: scale(1.9); }
+}
+
+.lang-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* Card info */
+.audio-info { padding: 1rem 1rem 0.5rem !important; flex: 1; }
+
+.audio-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--mct-text);
+  margin: 0 0 0.35rem;
+}
+
+.audio-author {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--mct-saffron);
+  margin: 0 0 0.5rem;
+
+  mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+}
+
+.audio-desc {
+  font-size: 0.83rem;
+  color: var(--mct-muted);
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.audio-progress { margin-bottom: 0.5rem; border-radius: 4px; }
+
+.now-playing {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--mct-saffron);
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+
+  mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+}
+
+.audio-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: var(--mct-muted);
+  margin-top: auto;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+  }
+}
+
+/* Actions */
+.audio-actions {
+  display: flex !important;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem !important;
+  flex-wrap: wrap;
+
+  button { flex: 1; min-width: 110px; }
+}
+
+/* ── Empty state ── */
+.blog-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  color: var(--mct-muted);
+
+  mat-icon { font-size: 3rem; width: 3rem; height: 3rem; opacity: 0.4; }
+  p { font-size: 0.95rem; }
+}

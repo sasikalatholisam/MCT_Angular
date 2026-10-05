@@ -1,0 +1,318 @@
+<!-- ══════════════════════════════════════════════════════════════════════
+     ABOUT PAGE — Premium Redesign
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── 1. Page Hero — parallax like history/activities ── -->
+<div class="about-hero">
+  <div class="about-hero-bg"></div>
+  <div class="about-hero-overlay"></div>
+
+  <div class="about-hero-content">
+    <p class="about-breadcrumbs">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'about.title' | translate }}</span>
+    </p>
+    <h1>{{ 'about.page_heading' | translate }}</h1>
+    <p class="about-hero-sub">Serving Humanity Since 2013 — Naimisharanya Ashramam, Mellacheruvu</p>
+
+    <!-- Inline tag pills in hero -->
+    <div class="about-hero-tags">
+      <span><mat-icon>favorite</mat-icon> Compassion</span>
+      <span><mat-icon>self_improvement</mat-icon> Spirituality</span>
+      <span><mat-icon>volunteer_activism</mat-icon> Service</span>
+      <span><mat-icon>public</mat-icon> Rural Reach</span>
+    </div>
+  </div>
+
+  <!-- Floating stats bar overlapping hero bottom -->
+  <div class="about-stats-bar">
+    <div class="about-stat">
+      <mat-icon class="about-stat-icon">calendar_month</mat-icon>
+      <span class="about-stat-num">10+</span>
+      <span class="about-stat-label">Years of Service</span>
+    </div>
+    <div class="about-stat-divider"></div>
+    <div class="about-stat">
+      <mat-icon class="about-stat-icon">people</mat-icon>
+      <span class="about-stat-num">50K+</span>
+      <span class="about-stat-label">Lives Touched</span>
+    </div>
+    <div class="about-stat-divider"></div>
+    <div class="about-stat">
+      <mat-icon class="about-stat-icon">temple_hindu</mat-icon>
+      <span class="about-stat-num">6+</span>
+      <span class="about-stat-label">Meditation Halls</span>
+    </div>
+    <div class="about-stat-divider"></div>
+    <div class="about-stat">
+      <mat-icon class="about-stat-icon">verified</mat-icon>
+      <span class="about-stat-num">100%</span>
+      <span class="about-stat-label">Non-Profit</span>
+    </div>
+  </div>
+
+  <!-- OM watermark -->
+  <div class="about-hero-om" aria-hidden="true">ॐ</div>
+</div>
+
+<!-- ── 2. Marquee ── -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span>
+    {{ 'marquee.about' | translate }}
+    <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     3. MISSION & OBJECTIVES — Bold accent split
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="about-mission-section">
+  <div class="mct-container about-mission-grid">
+
+    <!-- Left: Image with saffron frame -->
+    <div class="about-mission-img-wrap">
+      <div class="about-mission-img-frame">
+        <img src="images/ashrm/aboutPageImages/mission1.png" alt="MCT Mission" />
+      </div>
+      <!-- floating badge -->
+      <div class="about-mission-badge">
+        <mat-icon>diversity_3</mat-icon>
+        <span>Serving Humanity</span>
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="about-mission-text">
+      <p class="about-eyebrow">Who We Are</p>
+      <h2>{{ 'about.objectives_title' | translate }}</h2>
+      <div class="about-accent-line"></div>
+      <p>{{ 'about.objectives_text1' | translate }}</p>
+      <p>{{ 'about.objectives_text2' | translate }}</p>
+
+      <!-- Core value chips -->
+      <div class="about-value-chips">
+        <span class="about-chip"><mat-icon>favorite</mat-icon> Compassion</span>
+        <span class="about-chip"><mat-icon>self_improvement</mat-icon> Spirituality</span>
+        <span class="about-chip"><mat-icon>volunteer_activism</mat-icon> Service</span>
+        <span class="about-chip"><mat-icon>balance</mat-icon> Truth</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     4. ACTIVITIES — Dark immersive band
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="about-activities-section">
+  <div class="about-activities-bg"></div>
+  <div class="about-activities-overlay"></div>
+
+  <div class="mct-container about-activities-inner">
+
+    <!-- Carousel -->
+    <div class="about-carousel">
+      <div class="carousel-track">
+        <img
+          [src]="activitySlides[activeSlide()].img"
+          [alt]="activitySlides[activeSlide()].caption"
+          class="carousel-img"
+        />
+        <div class="carousel-caption-bar">
+          {{ activitySlides[activeSlide()].caption }}
+        </div>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="carousel-dots">
+        @for (slide of activitySlides; track $index) {
+          <button class="dot" [class.active]="$index === activeSlide()"
+                  (click)="goToSlide($index)"
+                  [attr.aria-label]="'Slide ' + ($index + 1)"></button>
+        }
+      </div>
+
+      <button class="carousel-btn prev" (click)="prevSlide()" aria-label="Previous">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button class="carousel-btn next" (click)="nextSlide()" aria-label="Next">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <!-- Text -->
+    <div class="about-activities-text">
+      <p class="about-eyebrow-light">What We Do</p>
+      <h2>{{ 'about.activities_title' | translate }}</h2>
+      <div class="about-accent-line-light"></div>
+
+      <div class="about-act-items">
+        <div class="about-act-item">
+          <span class="about-act-icon"><mat-icon>water_drop</mat-icon></span>
+          <p>{{ 'about.activities_text1' | translate }}</p>
+        </div>
+        <div class="about-act-item">
+          <span class="about-act-icon"><mat-icon>self_improvement</mat-icon></span>
+          <p>{{ 'about.activities_text2' | translate }}</p>
+        </div>
+        <div class="about-act-item">
+          <span class="about-act-icon"><mat-icon>public</mat-icon></span>
+          <p>{{ 'about.activities_text3' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     5. PROJECTS — Cards + expandable list
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="about-projects-section mct-section-light">
+  <div class="mct-container">
+
+    <div class="about-projects-top">
+      <div>
+        <p class="about-eyebrow">Our Initiatives</p>
+        <h2>{{ 'about.projects_title' | translate }}</h2>
+        <div class="about-accent-line"></div>
+      </div>
+    </div>
+
+    <div class="about-projects-grid">
+
+      <!-- Left: project pill badges -->
+      <div class="about-projects-badges">
+        @for (item of projects; track $index) {
+          <div class="about-project-pill">
+            <span class="about-pill-num">{{ $index + 1 | number:'2.0-0' }}</span>
+            <span class="about-pill-text">{{ item }}</span>
+          </div>
+        }
+      </div>
+
+      <!-- Right: carousel + ongoing/future -->
+      <div class="about-projects-right">
+
+        <!-- Project carousel -->
+        <div class="about-carousel about-project-carousel">
+          <div class="carousel-track">
+            <img
+              [src]="projectSlides[activeProjectSlide()].img"
+              [alt]="projectSlides[activeProjectSlide()].caption"
+              class="carousel-img"
+            />
+            <div class="carousel-caption-bar">
+              {{ projectSlides[activeProjectSlide()].caption }}
+            </div>
+          </div>
+
+          <div class="carousel-dots">
+            @for (slide of projectSlides; track $index) {
+              <button class="dot" [class.active]="$index === activeProjectSlide()"
+                      (click)="goToProjectSlide($index)"
+                      [attr.aria-label]="'Slide ' + ($index + 1)"></button>
+            }
+          </div>
+
+          <button class="carousel-btn prev" (click)="prevProjectSlide()" aria-label="Previous">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button class="carousel-btn next" (click)="nextProjectSlide()" aria-label="Next">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+
+        <!-- Ongoing projects strip -->
+        <div class="about-ongoing-strip">
+          <p class="about-strip-label">
+            <mat-icon>loop</mat-icon>
+            {{ 'about.ongoing_title' | translate }}
+          </p>
+          <div class="about-ongoing-tags">
+            @for (item of ongoing; track $index) {
+              <span class="about-ongoing-tag">{{ item }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Future projects (toggleable) -->
+        @if (showMore()) {
+          <div class="about-future-list">
+            <p class="about-strip-label"><mat-icon>rocket_launch</mat-icon> {{ 'about.future_title' | translate }}</p>
+            <ul>
+              @for (item of future; track $index) {
+                <li><mat-icon>arrow_forward_ios</mat-icon> {{ item }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        <button mat-flat-button class="about-readmore-btn" (click)="toggleShowMore()">
+          <mat-icon>{{ showMore() ? 'expand_less' : 'expand_more' }}</mat-icon>
+          {{ showMore() ? ('about.read_less' | translate) : ('about.read_more' | translate) }}
+        </button>
+
+      </div><!-- /projects-right -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     6. MCT OUTREACH — Cards with coloured top accent
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="mct-section about-outreach-section">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <p class="about-eyebrow">Community Impact</p>
+      <h2>{{ 'about.outreach_title' | translate }}</h2>
+    </div>
+    <div class="about-accent-cards-grid">
+      @for (card of outreachCards; track $index) {
+        <div class="about-accent-card" [class.card-gold]="$index === 1" [class.card-green]="$index === 2">
+          <div class="about-accent-card-img" [style.background-image]="'url(' + card.img + ')'">
+            <div class="about-accent-card-img-overlay"></div>
+          </div>
+          <div class="about-accent-card-body">
+            <span class="about-accent-card-num">0{{ $index + 1 }}</span>
+            <h3>{{ card.titleKey | translate }}</h3>
+            <p>{{ card.descKey | translate }}</p>
+            <span class="about-accent-card-arrow"><mat-icon>arrow_forward</mat-icon></span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     7. EDUCATIONAL INITIATIVES — Icon-feature cards
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="mct-section-light about-edu-section">
+  <div class="mct-container">
+    <div class="mct-section-heading">
+      <p class="about-eyebrow">Knowledge & Learning</p>
+      <h2>{{ 'about.edu_title' | translate }}</h2>
+    </div>
+    <div class="about-edu-grid">
+      @for (card of educationCards; track $index) {
+        <div class="about-edu-card">
+          <!-- top image -->
+          <div class="about-edu-card-img" [style.background-image]="'url(' + card.img + ')'"></div>
+          <!-- icon badge -->
+          <div class="about-edu-icon-badge">
+            @if ($index === 0) { <mat-icon>menu_book</mat-icon> }
+            @if ($index === 1) { <mat-icon>auto_stories</mat-icon> }
+            @if ($index === 2) { <mat-icon>diversity_1</mat-icon> }
+          </div>
+          <div class="about-edu-card-body">
+            <h3>{{ card.titleKey | translate }}</h3>
+            <p>{{ card.descKey | translate }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

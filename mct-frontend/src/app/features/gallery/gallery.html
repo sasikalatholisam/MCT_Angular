@@ -1,0 +1,168 @@
+<!-- GALLERY PAGE — Tirumala-style: left sub-nav sidebar + main album grid + lightbox -->
+
+<div class="gallery-hero">
+  <div class="gallery-hero-bg"></div>
+  <div class="gallery-hero-overlay"></div>
+  <div class="gallery-hero-content">
+    <p class="gallery-breadcrumb">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'gallery.title' | translate }}</span>
+    </p>
+    <h1>{{ 'gallery.page_heading' | translate }}</h1>
+    <p class="gallery-hero-sub">Photos from our activities, meditation halls & community events</p>
+    <div class="gallery-hero-tags">
+      <span><mat-icon>photo_library</mat-icon> All Albums</span>
+      <span><mat-icon>temple_hindu</mat-icon> Meditation Halls</span>
+      <span><mat-icon>celebration</mat-icon> Events</span>
+    </div>
+  </div>
+  <!-- watermark -->
+  <div class="gallery-hero-watermark" aria-hidden="true">MCT</div>
+</div>
+
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.gallery' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ── Category tab bar (top) ── -->
+<div class="gallery-cat-bar">
+  @for (cat of categories; track cat.id) {
+    <button class="cat-tab"
+            [class.active]="activeCatId() === cat.id"
+            (click)="selectCategory(cat.id)">
+      <mat-icon>{{ cat.icon }}</mat-icon>
+      <span>{{ categoryLabel(cat) }}</span>
+    </button>
+  }
+</div>
+
+<!-- ── Two-column layout: sidebar + main ── -->
+<div class="gallery-layout mct-container">
+
+  <!-- LEFT SIDEBAR — Album sub-navigation -->
+  <aside class="gallery-sidebar">
+    <div class="sidebar-heading">
+      <mat-icon>{{ activeCategory.icon }}</mat-icon>
+      <span>{{ categoryLabel(activeCategory) }}</span>
+    </div>
+
+    <nav class="album-nav" aria-label="Gallery albums">
+      @for (album of activeCategory.albums; track album.id) {
+        <button class="album-nav-item"
+                [class.active]="activeAlbumId() === album.id"
+                (click)="selectAlbum(album.id)"
+                matRipple>
+          <!-- Thumbnail preview -->
+          <div class="album-nav-thumb"
+               [style.background-image]="'url(' + album.coverSrc + ')'">
+          </div>
+          <div class="album-nav-info">
+            <span class="album-nav-label">{{ albumLabel(album) }}</span>
+            <span class="album-nav-count">{{ album.images.length }} {{ 'gallery.photos_label' | translate }}</span>
+          </div>
+          @if (activeAlbumId() === album.id) {
+            <mat-icon class="album-nav-arrow">chevron_right</mat-icon>
+          }
+        </button>
+      }
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT — Album header + image grid -->
+  <main class="gallery-main">
+
+    <!-- Album breadcrumb + title -->
+    <div class="album-header">
+      <div class="album-breadcrumb">
+        <span>{{ 'gallery.title' | translate }}</span>
+        <mat-icon>chevron_right</mat-icon>
+        <span>{{ categoryLabel(activeCategory) }}</span>
+        <mat-icon>chevron_right</mat-icon>
+        <span class="current">{{ albumLabel(activeAlbum) }}</span>
+      </div>
+
+      <div class="album-title-row">
+        <div>
+          <h2 class="album-title">{{ albumLabel(activeAlbum) }}</h2>
+          <p class="album-subtitle">
+            <mat-icon>photo_library</mat-icon>
+            {{ totalImages }} {{ 'gallery.photos_label' | translate }}
+            @if (albumImageCount !== totalImages) {
+              &nbsp;·&nbsp; {{ albumImageCount }} {{ 'gallery.showing' | translate }}
+            }
+          </p>
+        </div>
+
+        <!-- Search within album -->
+        <mat-form-field appearance="outline" class="album-search">
+          <mat-label>{{ 'gallery.search_placeholder' | translate }}</mat-label>
+          <input matInput [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Image grid -->
+    @if (filteredImages.length === 0) {
+      <div class="gallery-empty">
+        <mat-icon>image_not_supported</mat-icon>
+        <p>{{ 'gallery.no_results' | translate }}</p>
+      </div>
+    } @else {
+      <div class="gallery-grid">
+        @for (img of filteredImages; track img.src; let i = $index) {
+          <div class="gallery-thumb" (click)="openLightbox(i)" matRipple>
+
+            <!-- Image -->
+            <div class="thumb-img" [style.background-image]="'url(' + img.src + ')'">
+              <div class="thumb-overlay">
+                <mat-icon>zoom_in</mat-icon>
+              </div>
+              <!-- Download FAB -->
+              <button class="thumb-download"
+                      mat-icon-button
+                      [matTooltip]="'gallery.download_tooltip' | translate"
+                      (click)="downloadImage(img, $event)">
+                <mat-icon>file_download</mat-icon>
+              </button>
+            </div>
+
+            <!-- Caption bar -->
+            <div class="thumb-caption">
+              <span>{{ caption(img) }}</span>
+              <span class="thumb-index">#{{ i + 1 }}</span>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ── Album quick-jump: other albums in this category ── -->
+    @if (activeCategory.albums.length > 1) {
+      <div class="other-albums">
+        <h3>{{ 'gallery.other_albums' | translate }}</h3>
+        <div class="other-albums-grid">
+          @for (album of activeCategory.albums; track album.id) {
+            @if (album.id !== activeAlbumId()) {
+              <div class="other-album-card" (click)="selectAlbum(album.id)" matRipple>
+                <div class="other-album-cover"
+                     [style.background-image]="'url(' + album.coverSrc + ')'">
+                  <div class="other-album-overlay">
+                    <mat-icon>photo_library</mat-icon>
+                  </div>
+                </div>
+                <p class="other-album-label">{{ albumLabel(album) }}</p>
+                <p class="other-album-count">{{ album.images.length }} {{ 'gallery.photos_label' | translate }}</p>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    }
+
+  </main>
+</div>

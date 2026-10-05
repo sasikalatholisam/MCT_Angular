@@ -1,0 +1,367 @@
+/* ══════════════════════════════════════════════════════════════════════
+   ACTIVITIES PAGE — Premium Redesign
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Hero — History-style full premium hero ── */
+.act-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+
+  @media (max-width: 768px) { min-height: 320px; }
+  @media (max-width: 480px) { min-height: 260px; }
+}
+
+.act-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ashrm/aboutPageImages/activities_2.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+
+  @media (max-width: 768px) { background-attachment: scroll; }
+}
+
+.act-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(90, 30, 0, 0.82), rgba(0, 0, 0, 0.62));
+  z-index: 1;
+}
+
+.act-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #fff;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+    @media (max-width: 768px) { font-size: 2.1rem; }
+    @media (max-width: 480px) { font-size: 1.65rem; }
+  }
+}
+
+.act-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 0.5rem;
+
+  a {
+    color: #ffd6a5;
+    text-decoration: none;
+    &:hover { color: #fff; }
+  }
+
+  mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+}
+
+.act-hero-sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.5rem 0 0;
+}
+
+/* Decorative OM watermark */
+.act-hero-om {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20rem;
+  color: rgba(255, 255, 255, 0.04);
+  font-family: serif;
+  pointer-events: none;
+  line-height: 1;
+  z-index: 1;
+  user-select: none;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Section 1 — What We Do (Feature Grid)
+   ══════════════════════════════════════════════════════════════════════ */
+
+.act-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+
+  @media (max-width: 900px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.act-feature-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  border-left: 4px solid transparent;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-left-color 0.28s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border-left-color: var(--mct-saffron, #f86f2d);
+  }
+
+  /* Icon circle */
+  .act-feat-icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f86f2d 0%, #faaa3a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    mat-icon {
+      color: #fff;
+      font-size: 1.6rem;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+
+  /* Large background number */
+  .act-feat-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--mct-saffron, #f86f2d);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mct-deep, #c94b00);
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: var(--mct-muted, #4a5562);
+    line-height: 1.65;
+    margin: 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CTA Band — Parallax Stats Strip
+   ══════════════════════════════════════════════════════════════════════ */
+
+.act-cta-band {
+  position: relative;
+  padding: 4rem 0;
+  background-image: url('/images/ashrm/homePageImages/yoga_school.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  @media (max-width: 768px) { background-attachment: scroll; }
+}
+
+.act-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(90, 30, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 0;
+}
+
+.act-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+.act-cta-text {
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.65rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+    line-height: 1.7;
+  }
+}
+
+.act-cta-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) { justify-content: center; }
+}
+
+.act-stat {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  span:last-child {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+
+.act-stat-n {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffd6a5;
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Section 2 — Outreach Photo Cards (Magazine Style)
+   ══════════════════════════════════════════════════════════════════════ */
+
+.act-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 900px) { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.act-photo-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
+
+    .act-photo-img > div {
+      transform: scale(1.06);
+    }
+  }
+}
+
+/* Image wrapper — contains the zoomable inner div + tag pill */
+.act-photo-img {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+
+  > div {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease;
+  }
+
+  @media (max-width: 480px) { height: 170px; }
+}
+
+/* Saffron tag pill */
+.act-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--mct-saffron, #f86f2d);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+/* Card body */
+.act-photo-body {
+  padding: 1.25rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mct-deep, #c94b00);
+    margin: 0 0 0.4rem;
+    line-height: 1.35;
+  }
+
+  p {
+    font-size: 0.84rem;
+    color: var(--mct-muted, #4a5562);
+    line-height: 1.65;
+    margin: 0;
+
+    /* Clamp body text to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Arrow read-more link */
+.act-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--mct-saffron, #f86f2d);
+  text-decoration: none;
+  margin-top: 0.75rem;
+  transition: gap 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--mct-deep, #c94b00);
+    gap: 0.55rem;
+  }
+
+  mat-icon {
+    font-size: 0.9rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    line-height: 1;
+  }
+}

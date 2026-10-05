@@ -1,0 +1,105 @@
+<header class="navbar">
+
+  <!-- Top Info Bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="phone-hide">
+        <i class="fa-solid fa-phone"></i>
+        {{ 'topbar.phone' | translate }}
+      </span>
+      <span>
+        <i class="fa-solid fa-envelope"></i>
+        {{ 'topbar.email' | translate }}
+      </span>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+      <button (click)="lang.switchLanguage('en')"
+              [class.active]="lang.activeLang() === 'en'">EN</button>
+      <span>|</span>
+      <button (click)="lang.switchLanguage('te')"
+              [class.active]="lang.activeLang() === 'te'">తె</button>
+    </div>
+  </div>
+
+  <!-- Main Nav -->
+  <nav class="main-nav">
+
+    <!-- Brand -->
+    <a class="brand" routerLink="/" (click)="closeMenu()">
+      <div class="logo-circle">
+        <img src="mct_logo.png" alt="MCT Logo" class="logo-img" />
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">{{ 'brand.name' | translate }}</span>
+        <span class="brand-tagline">{{ 'brand.tagline' | translate }}</span>
+      </div>
+    </a>
+
+    <!-- Hamburger -->
+    <button class="hamburger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" [class.open]="menuOpen()">
+      <li><a routerLink="/"           routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">{{ 'nav.home'       | translate }}</a></li>
+      <li><a routerLink="/about"      routerLinkActive="active" (click)="closeMenu()">{{ 'nav.about'      | translate }}</a></li>
+      <li><a routerLink="/activities" routerLinkActive="active" (click)="closeMenu()">{{ 'nav.activities' | translate }}</a></li>
+      <!-- Media dropdown: Gallery + Blog -->
+      <li class="has-dropdown" [class.open]="mediaDropOpen()">
+        <button class="nav-dropdown-trigger"
+                [class.active]="mediaDropOpen()"
+                (click)="toggleMedia()">
+          {{ 'nav.media' | translate }}
+          <i class="fa-solid fa-chevron-down drop-arrow"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">
+              <i class="fa-solid fa-images"></i>
+              {{ 'nav.gallery' | translate }}
+            </a>
+          </li>
+          <li>
+            <a routerLink="/blog" routerLinkActive="active" (click)="closeMenu()">
+              <i class="fa-solid fa-headphones"></i>
+              {{ 'nav.blog' | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li><a routerLink="/events"     routerLinkActive="active" (click)="closeMenu()">{{ 'nav.events'     | translate }}</a></li>
+      <li><a routerLink="/history"    routerLinkActive="active" (click)="closeMenu()">{{ 'nav.history'    | translate }}</a></li>
+
+      <!-- Administration dropdown -->
+      <li class="has-dropdown" [class.open]="adminDropOpen()">
+        <button class="nav-dropdown-trigger"
+                [class.active]="adminDropOpen()"
+                (click)="toggleAdmin()">
+          {{ 'nav.administration' | translate }}
+          <i class="fa-solid fa-chevron-down drop-arrow"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a routerLink="/management" routerLinkActive="active" (click)="closeMenu()">
+              <i class="fa-solid fa-users-gear"></i>
+              {{ 'nav.management' | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li><a routerLink="/contact"    routerLinkActive="active" (click)="closeMenu()">{{ 'nav.contact'    | translate }}</a></li>
+      <li>
+        <a routerLink="/donation" class="donate-btn" (click)="closeMenu()">
+          <i class="fa-solid fa-heart"></i>
+          {{ 'nav.donate_btn' | translate }}
+        </a>
+      </li>
+    </ul>
+
+  </nav>
+
+</header>

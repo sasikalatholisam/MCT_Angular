@@ -1,0 +1,120 @@
+<!-- MCT MANAGEMENT PAGE — Premium Board Design -->
+
+<!-- ── Hero ── -->
+<div class="mgmt-hero">
+  <div class="mgmt-hero-bg"></div>
+  <div class="mgmt-hero-overlay"></div>
+  <div class="mct-container mgmt-hero-inner">
+    <p class="mgmt-breadcrumb">
+      <a routerLink="/">Home</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ 'management.title' | translate }}</span>
+    </p>
+    <h1>{{ 'management.page_heading' | translate }}</h1>
+    <p class="mgmt-hero-sub">{{ 'management.page_subtitle' | translate }}</p>
+    <!-- Stats row in hero -->
+    <div class="mgmt-hero-stats">
+      <span><mat-icon>verified_user</mat-icon> 12 Board Members</span>
+      <span><mat-icon>calendar_month</mat-icon> Since 2013</span>
+      <span><mat-icon>location_on</mat-icon> Mellacheruvu, AP</span>
+    </div>
+  </div>
+  <!-- Floating MCT logo watermark -->
+  <div class="mgmt-hero-watermark" aria-hidden="true">MCT</div>
+</div>
+
+<!-- ── Marquee ── -->
+<div class="mct-marquee">
+  <div class="marquee-track">
+    <span class="om">ॐ</span> {{ 'marquee.management' | translate }} <span class="om">ॐ</span>
+  </div>
+</div>
+
+<!-- ── Main section ── -->
+<section class="mct-section mgmt-section">
+  <div class="mct-container">
+
+    <!-- Section heading with accent -->
+    <div class="mgmt-section-head">
+      <p class="mgmt-eyebrow">Leadership &amp; Governance</p>
+      <h2>{{ 'management.board_title' | translate }}</h2>
+      <div class="mgmt-accent-line"></div>
+      <p class="mgmt-section-sub">{{ 'management.board_subtitle' | translate }}</p>
+    </div>
+
+    <!-- Filter tabs — pill style with counts -->
+    <div class="mgmt-filter-row">
+      @for (cat of categories; track cat.id) {
+        <button class="mgmt-pill" [class.active]="activeCategory() === cat.id" (click)="setCategory(cat.id)">
+          <mat-icon>{{ cat.icon }}</mat-icon>
+          <span>{{ 'management.cat_' + cat.id | translate }}</span>
+          <span class="mgmt-pill-count">{{ countFor(cat.id) }}</span>
+        </button>
+      }
+    </div>
+
+    <!-- Member grid — unique card design -->
+    <div class="mgmt-board-grid">
+      @for (member of filteredMembers; track member.id) {
+        <div class="mgmt-member-card" [class]="'mc-' + member.category">
+
+          <!-- Top accent stripe + photo -->
+          <div class="mgmt-card-top">
+            <div class="mgmt-card-category-stripe"></div>
+            <div class="mgmt-photo-ring">
+              <div class="mgmt-photo" [style.background-image]="'url(' + member.photo + ')'">
+                <div class="mgmt-initials">
+                  {{ memberName(member).split(' ').slice(1, 3).map(w => w[0]).join('') }}
+                </div>
+              </div>
+            </div>
+            <!-- Category badge icon -->
+            <span class="mgmt-cat-badge mc-badge-{{ member.category }}">
+              @switch (member.category) {
+                @case ('trustee')     { <mat-icon>verified_user</mat-icon> }
+                @case ('advisory')    { <mat-icon>psychology</mat-icon> }
+                @case ('operational') { <mat-icon>settings</mat-icon> }
+              }
+            </span>
+          </div>
+
+          <!-- Card body -->
+          <div class="mgmt-card-body">
+            <h3>{{ memberName(member) }}</h3>
+            <p class="mgmt-desig">{{ memberDesignation(member) }}</p>
+            <p class="mgmt-dept"><mat-icon>corporate_fare</mat-icon>{{ memberDept(member) }}</p>
+
+            <div class="mgmt-since-row">
+              <mat-icon>calendar_today</mat-icon>
+              <span>{{ 'management.since' | translate }} {{ member.since }}</span>
+            </div>
+
+            <div class="mgmt-divider"></div>
+
+            <p class="mgmt-bio">{{ memberBio(member) }}</p>
+          </div>
+
+        </div>
+      }
+    </div>
+
+    <!-- Trust info box — premium styled -->
+    <div class="mgmt-trust-box">
+      <div class="mgmt-trust-icon-wrap">
+        <mat-icon>account_balance</mat-icon>
+      </div>
+      <div class="mgmt-trust-content">
+        <p class="mgmt-trust-eyebrow">Legal &amp; Compliance</p>
+        <h3>{{ 'management.trust_info_title' | translate }}</h3>
+        <p>{{ 'management.trust_info_text' | translate }}</p>
+        <div class="mgmt-trust-badges">
+          <span><mat-icon>verified</mat-icon> {{ 'management.info_reg' | translate }}</span>
+          <span><mat-icon>receipt_long</mat-icon> {{ 'management.info_80g' | translate }}</span>
+          <span><mat-icon>calendar_month</mat-icon> {{ 'management.info_est' | translate }}</span>
+          <span><mat-icon>location_on</mat-icon> {{ 'management.info_loc' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

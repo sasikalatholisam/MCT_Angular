@@ -1,0 +1,410 @@
+/* ══════════════════════════════════════════════════════════════════════
+   HISTORY PAGE — Premium Unique Timeline Design
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Hero — Management-style: separate bg div + overlay + MCT watermark ── */
+.history-hero {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+
+  @media (max-width: 768px) { min-height: 300px; }
+}
+
+.history-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ashrm/aboutPageImages/about_bg_light_3.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+
+  @media (max-width: 768px) { background-attachment: scroll; }
+}
+
+.history-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, rgba(60, 10, 0, 0.82) 0%, rgba(0, 0, 0, 0.65) 100%);
+  z-index: 1;
+}
+
+.history-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 1.5rem 3rem;
+  width: 100%;
+  max-width: var(--mct-container-max, 1200px);
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0.4rem 0 0.5rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+
+    @media (max-width: 768px) { font-size: 2rem; }
+    @media (max-width: 480px) { font-size: 1.6rem; }
+  }
+}
+
+.history-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 0.5rem;
+
+  a { color: #ffd6a5; text-decoration: none; &:hover { color: #fff; } }
+  mat-icon { font-size: 0.9rem; width: 0.9rem; height: 0.9rem; }
+}
+
+.history-hero-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 0.75rem;
+}
+
+.history-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+
+    mat-icon { font-size: 0.85rem; width: 0.85rem; height: 0.85rem; color: #ffd6a5; }
+  }
+}
+
+.history-hero-watermark {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 1;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+/* ── 2. Timeline Section ── */
+.history-timeline-section {
+  padding: 4rem 0;
+
+  .mct-section-heading {
+    text-align: center;
+    margin-bottom: 3.5rem;
+
+    .mct-section-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--mct-saffron, #f86f2d);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--mct-deep, #5a2e02);
+      margin: 0 0 0.5rem;
+      @media (max-width: 768px) { font-size: 1.75rem; }
+    }
+
+    p {
+      color: var(--mct-muted, #7a6652);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+  }
+}
+
+.history-timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  /* Vertical center line */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--mct-saffron, #f86f2d) 0%, var(--mct-gold, #d4a017) 100%);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+}
+
+.ht-item {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+
+  /* Left item (default): card on left (col 1), dot in center (col 2) */
+  .ht-card {
+    grid-column: 1;
+    border-left: 4px solid var(--mct-saffron, #f86f2d);
+  }
+
+  .ht-dot {
+    grid-column: 2;
+    background: linear-gradient(135deg, var(--mct-saffron, #f86f2d), #c0430a);
+    box-shadow: 0 0 0 4px rgba(248, 111, 45, 0.2);
+  }
+
+  /* Right item: card on right (col 3), dot in center (col 2) */
+  &.ht-right {
+    .ht-card {
+      grid-column: 3;
+      border-left: 4px solid var(--mct-gold, #d4a017);
+    }
+
+    .ht-dot {
+      grid-column: 2;
+      background: linear-gradient(135deg, var(--mct-gold, #d4a017), #a87905);
+      box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.25);
+    }
+  }
+}
+
+.ht-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  z-index: 1;
+  line-height: 1.2;
+  padding: 4px;
+  justify-self: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  span {
+    word-break: normal;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.ht-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  p {
+    font-size: 0.88rem;
+    color: var(--mct-muted, #7a6652);
+    line-height: 1.7;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.ht-year-bg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(248, 111, 45, 0.06);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 0;
+}
+
+.ht-card-icon {
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+
+  mat-icon {
+    font-size: 1.4rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--mct-saffron, #f86f2d);
+    display: block;
+  }
+}
+
+.ht-right .ht-card-icon mat-icon {
+  color: var(--mct-gold, #d4a017);
+}
+
+/* Responsive ≤ 700px */
+@media (max-width: 700px) {
+  .history-timeline {
+    padding: 1rem 0;
+
+    &::before {
+      left: 20px;
+      transform: none;
+    }
+  }
+
+  .ht-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    .ht-dot {
+      grid-column: 1 !important;
+      justify-self: center;
+      width: 40px;
+      height: 40px;
+      font-size: 0.65rem;
+    }
+
+    .ht-card {
+      grid-column: 2 !important;
+      padding: 1.25rem;
+    }
+
+    &.ht-right {
+      .ht-dot {
+        grid-column: 1 !important;
+      }
+      .ht-card {
+        grid-column: 2 !important;
+      }
+    }
+  }
+}
+
+/* ── 3. Bottom CTA Strip ── */
+.history-cta-strip {
+  background: linear-gradient(135deg, #5a2e02, #8b2500);
+  padding: 3.5rem 0;
+  text-align: center;
+  color: #fff;
+
+  .history-cta-eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #ffd6a5;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 1.5rem;
+    @media (max-width: 768px) { font-size: 1.45rem; }
+  }
+
+  .history-cta-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .history-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--mct-saffron, #f86f2d);
+    color: #fff;
+    border-radius: 24px;
+    padding: 0.65rem 1.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    &:hover {
+      background: #e05b1a;
+      transform: translateY(-2px);
+      color: #fff;
+    }
+  }
+
+  .history-cta-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 2px solid rgba(255, 220, 160, 0.6);
+    color: #ffd6a5;
+    border-radius: 24px;
+    padding: 0.65rem 1.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    &:hover {
+      border-color: #ffd6a5;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+  }
+}
